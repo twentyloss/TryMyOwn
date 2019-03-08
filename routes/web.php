@@ -12,3 +12,10 @@
 */
 
 Route::get('/','PagesController@root')->name('root');
+// 用户身份验证相关的路由
+// 用户注册相关路由
+// 密码重置相关路由
+// Email 认证相关路由
+Auth::routes();
+
+
