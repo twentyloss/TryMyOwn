@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -26,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('zh');
         Schema::defaultStringLength(191);
+        \App\Models\User::observe(UserObserver::class);
     }
 }
