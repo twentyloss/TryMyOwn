@@ -72,7 +72,7 @@ class TopicsController extends Controller
            'msg'=>'上传失败',
            'file_path'=>' '];
        if($file=$request->upload_file){
-        $result=$handler->save($file,'topics_upload',\Auth::id(),800);
+        $result=$handler->save($file,'topics_upload',\Auth::id(),751);
         if($result){
             $data=['success'=>true,
                 'msg'=>'图片上传成功！',
