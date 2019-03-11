@@ -10,17 +10,13 @@ class ReplyRequest extends Request
         {
             // CREATE
             case 'POST':
-            {
-                return [
-                    // CREATE ROLES
-                ];
-            }
+
             // UPDATE
             case 'PUT':
             case 'PATCH':
             {
                 return [
-                    // UPDATE ROLES
+                  'content'=>'required|max:80'
                 ];
             }
             case 'GET':
@@ -35,7 +31,8 @@ class ReplyRequest extends Request
     public function messages()
     {
         return [
-            // Validation messages
+            'content.required'=>'不能提交空回复哦😡',
+            'content.max'=>'废话太多啦！',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Observers\ReplyObserver;
 use App\Observers\TopicObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
@@ -30,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         \App\Models\User::observe(UserObserver::class);
         \App\Models\Topic::observe(TopicObserver::class);
+        \App\Models\Reply::observe(ReplyObserver::class);
     }
 }
