@@ -32,4 +32,8 @@ class Topic extends Model
     public function scopeRecentReplied($query){
         return $query->orderBy('updated_at','desc');
     }
+
+    public function link($param=[]){
+      return route('topics.show',array_merge([$this->id,$this->slug],$param));
+    }
 }
