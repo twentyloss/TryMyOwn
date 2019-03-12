@@ -6,10 +6,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable, MustVerifyEmailTrait;
+    use  MustVerifyEmailTrait;
+    use Notifiable{
+        notify as protected preliminaryNotify;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -46,5 +50,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     public function isAuthorOf( $model){
       return $this->id==$model->user_id;
+    }
+
+    public function notify($instance)
+    {
+        if($this->id == Auth::id()){
+            return ;
+        }
+
+        $this->preliminaryNotify($instance);
+        if(method_exists($instance,'toDatabase')){
+            $this->increment('notification_count');
+        }
     }
 }
